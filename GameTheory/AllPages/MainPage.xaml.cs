@@ -322,8 +322,6 @@ namespace GameTheory.AllPages
                 TxtOptimalStrategy.Text = "Не удалось определить оптимальную стратегию.";
             }
         }
-
-
         private void DisplayPieChart(List<CriterionResult> criteriaResults, string[] strategies)
         {
 
@@ -357,14 +355,18 @@ namespace GameTheory.AllPages
             var minValues = Enumerable.Range(0, payoffMatrix.GetLength(0))
                                       .Select(i => Enumerable.Range(0, payoffMatrix.GetLength(1)).Min(j => payoffMatrix[i, j]))
                                       .ToArray();
-            var optimalValue = minValues.Max();
-            int optimalStrategyIndex = Array.IndexOf(minValues, optimalValue) + 1;
 
-            TxtResult.Text = $"Оптимальная стратегия по критерию Вальда: A{optimalStrategyIndex}, значение: {optimalValue:F2}";
+            var optimalValue = minValues.Max();
+
+            int optimalStrategyIndex = Array.IndexOf(minValues, optimalValue);
+
+            string optimalStrategyName = strategies[optimalStrategyIndex];
+
+            TxtResult.Text = $"Оптимальная стратегия по критерию Вальда: {optimalStrategyName}, значение: {optimalValue:F2}";
 
             if (!criteriaResults.Any(r => r.CriterionName == "Вальда"))
             {
-                criteriaResults.Add(new CriterionResult("Вальда", optimalStrategyIndex));
+                criteriaResults.Add(new CriterionResult("Вальда", optimalStrategyIndex + 1)); 
             }
         }
         private void SolveMax()
@@ -372,14 +374,18 @@ namespace GameTheory.AllPages
             var maxValues = Enumerable.Range(0, payoffMatrix.GetLength(0))
                                       .Select(i => Enumerable.Range(0, payoffMatrix.GetLength(1)).Max(j => payoffMatrix[i, j]))
                                       .ToArray();
-            var optimalValue = maxValues.Max();
-            int optimalStrategyIndex = Array.IndexOf(maxValues, optimalValue) + 1;
 
-            TxtResult.Text = $"Оптимальная стратегия по критерию максимума: A{optimalStrategyIndex}, значение: {optimalValue:F2}";
+            var optimalValue = maxValues.Max();
+
+            int optimalStrategyIndex = Array.IndexOf(maxValues, optimalValue);
+
+            string optimalStrategyName = strategies[optimalStrategyIndex];
+
+            TxtResult.Text = $"Оптимальная стратегия по критерию максимума: {optimalStrategyName}, значение: {optimalValue:F2}";
 
             if (!criteriaResults.Any(r => r.CriterionName == "Максимума"))
             {
-                criteriaResults.Add(new CriterionResult("Максимума", optimalStrategyIndex));
+                criteriaResults.Add(new CriterionResult("Максимума", optimalStrategyIndex + 1));
             }
         }
         private void SolveHurwicz(double alpha)
@@ -394,11 +400,13 @@ namespace GameTheory.AllPages
                                           .ToArray();
             var optimalValue = hurwiczValues.Max();
 
-            int optimalStrategyIndex = Array.IndexOf(hurwiczValues, optimalValue) + 1; 
-            TxtResult.Text = $"Оптимальная стратегия по критерию Гурвица: A{optimalStrategyIndex}, значение: {optimalValue}";
+            int optimalStrategyIndex = Array.IndexOf(hurwiczValues, optimalValue) + 1;
+            string optimalStrategyName = strategies[optimalStrategyIndex];
+
+            TxtResult.Text = $"Оптимальная стратегия по критерию Гурвица: {optimalStrategyName}, значение: {optimalValue}";
             if (!criteriaResults.Any(r => r.CriterionName == "Гурвица"))
             {
-                criteriaResults.Add(new CriterionResult("Гурвица", optimalStrategyIndex));
+                criteriaResults.Add(new CriterionResult("Гурвица", optimalStrategyIndex + 1));
             }
 
 
@@ -431,12 +439,14 @@ namespace GameTheory.AllPages
 
             double optimalRegret = maxRegretPerStrategy.Min(); 
             int optimalStrategyIndex = Array.IndexOf(maxRegretPerStrategy, optimalRegret) + 1;
+            string optimalStrategyName = strategies[optimalStrategyIndex];
+
             if (!criteriaResults.Any(r => r.CriterionName == "Сэвиджа"))
             {
-                criteriaResults.Add(new CriterionResult("Сэвиджа", optimalStrategyIndex));
+                criteriaResults.Add(new CriterionResult("Сэвиджа", optimalStrategyIndex + 1));
             }
 
-            TxtResult.Text = $"Оптимальная стратегия по критерию Сэвиджа: A{optimalStrategyIndex}, с наименьшим максимальным риском: {optimalRegret:F2}";
+            TxtResult.Text = $"Оптимальная стратегия по критерию Сэвиджа: {optimalStrategyName}, с наименьшим максимальным риском: {optimalRegret:F2}";
         }
         private void SolveLaplace()
         {
@@ -451,12 +461,14 @@ namespace GameTheory.AllPages
 
             double optimalLaplaceValue = laplaceValues.Max();
             int optimalStrategyIndex = Array.IndexOf(laplaceValues, optimalLaplaceValue) + 1;
+            string optimalStrategyName = strategies[optimalStrategyIndex];
 
-            TxtResult.Text = $"Оптимальная стратегия по критерию Лапласа: A{optimalStrategyIndex}, среднее значение: {optimalLaplaceValue:F2}";
+
+            TxtResult.Text = $"Оптимальная стратегия по критерию Лапласа: {optimalStrategyName}, среднее значение: {optimalLaplaceValue:F2}";
 
             if (!criteriaResults.Any(r => r.CriterionName == "Лапласа"))
             {
-                criteriaResults.Add(new CriterionResult("Лапласа", optimalStrategyIndex));
+                criteriaResults.Add(new CriterionResult("Лапласа", optimalStrategyIndex + 1));
             }
         }
         private void SolveBayesLaplace()
@@ -508,12 +520,14 @@ namespace GameTheory.AllPages
 
             double optimalValue = bayesLaplaceValues.Max();
             int optimalStrategyIndex = Array.IndexOf(bayesLaplaceValues, optimalValue) + 1;
+            string optimalStrategyName = strategies[optimalStrategyIndex];
 
-            TxtResult.Text = $"Оптимальная стратегия по критерию Байеса-Лапласа: A{optimalStrategyIndex}, математическое ожидание: {optimalValue:F2}";
+
+            TxtResult.Text = $"Оптимальная стратегия по критерию Байеса-Лапласа: {optimalStrategyName}, математическое ожидание: {optimalValue:F2}";
 
             if (!criteriaResults.Any(r => r.CriterionName == "Байеса-Лапласа"))
             {
-                criteriaResults.Add(new CriterionResult("Байеса-Лапласа", optimalStrategyIndex));
+                criteriaResults.Add(new CriterionResult("Байеса-Лапласа", optimalStrategyIndex + 1));
             }
         }
         private bool TryParseProbabilities(string[] probabilityStrings, out double[] probabilities)

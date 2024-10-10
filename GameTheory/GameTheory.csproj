@@ -84,7 +84,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="AllClass\CriterionResult.cs" />
-    <Compile Include="AllClass\OptimalStrategy.cs" />
     <Compile Include="AllClass\StrategyResult.cs" />
     <Compile Include="AllPages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
