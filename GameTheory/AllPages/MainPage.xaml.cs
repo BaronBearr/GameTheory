@@ -16,7 +16,6 @@ namespace GameTheory.AllPages
 {
     public partial class MainPage : Page
     {
-        //private int[,] payoffMatrix;
         private double[,] payoffMatrix;
         private List<CriterionResult> criteriaResults = new List<CriterionResult>();
 
@@ -82,7 +81,6 @@ namespace GameTheory.AllPages
                         timer.Start();
                         return;
                     }
-                    //OptimalStrategiesGrid.ItemsSource = null;
                     criteriaResults.Clear();
                     TxtResult.Text = string.Empty;
                     TxtOptimalStrategy.Text = string.Empty;
@@ -317,7 +315,6 @@ namespace GameTheory.AllPages
 
             if (bestStrategy != null)
             {
-                // Выводим информацию в TextBlock
                 TxtOptimalStrategy.Text = $"Самая оптимальная стратегия: {bestStrategy.Strategy} (выбрана {bestStrategy.Count} раз(а))";
             }
             else
@@ -353,7 +350,6 @@ namespace GameTheory.AllPages
                 });
             }
 
-            // Присваиваем данные диаграмме
             OptimalStrategiesChart.Series = pieChartData;
         }
         private void SolveWald()
@@ -556,9 +552,6 @@ namespace GameTheory.AllPages
             });
 
         }
-
-
-
 
     }
 }
