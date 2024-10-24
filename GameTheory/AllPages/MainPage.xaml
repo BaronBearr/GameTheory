@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:GameTheory.AllPages"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
-      d:DesignHeight="750" d:DesignWidth="1200"
+      d:DesignHeight="800" d:DesignWidth="1200"
       Title="MainPage">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -32,7 +32,7 @@
         <Button Click="Clear_Click" Width="120" Height="30" Content="Очистить" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 50 20"/>
 
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="400" Height="300" CornerRadius="20">
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1" Width="450" Height="400" CornerRadius="20">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="PayoffGrid" Margin="10" ShowGridLines="True">
                      
@@ -42,33 +42,42 @@
             <Button Content="Загрузить файл" Click="BtnLoadFile_Click" Height="30" Width="150" Margin="0 20 0 0" />
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Выберите критерий:" FontWeight="Bold" Margin="0,0,0,10" />
+        <DockPanel Grid.Column="1" Grid.Row="1" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border CornerRadius="6" BorderBrush="Gray"  BorderThickness="2" DockPanel.Dock="Top">
+                <StackPanel Orientation="Vertical" Margin="10">
 
-            <RadioButton x:Name="RadioWald" Content="Критерий Вальда" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
-            <RadioButton x:Name="RadioMax" Content="Критерий максимума" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
-            <RadioButton x:Name="RadioHurwicz" Content="Критерий Гурвица" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
-            <RadioButton x:Name="RadioSavage" Content="Критерий Сэвиджа" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
-            <RadioButton x:Name="RadioLaplace" Content="Критерий Лапласа" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
-            <RadioButton x:Name="RadioBayesLaplace" Content="Критерий Байеса-Лапласа" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
+                    <TextBlock Text="Выберите критерий:" FontWeight="Bold" Margin="0,0,0,10" />
+                    <RadioButton x:Name="RadioWald" Content="Критерий Вальда" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
+                    <RadioButton x:Name="RadioMax" Content="Критерий максимума" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
+                    <RadioButton x:Name="RadioHurwicz" Content="Критерий Гурвица" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
+                    <RadioButton x:Name="RadioSavage" Content="Критерий Сэвиджа" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
+                    <RadioButton x:Name="RadioLaplace" Content="Критерий Лапласа" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
+                    <RadioButton x:Name="RadioBayesLaplace" Content="Критерий Байеса-Лапласа" GroupName="CriteriaGroup" Margin="0,5" Checked="RadioButton_Checked" />
 
-            <StackPanel x:Name="HurwiczPanel" Orientation="Horizontal" Margin="0,10" Visibility="Collapsed">
-                <TextBlock Text="α (Коэффициент Гурвица):" VerticalAlignment="Center" Margin="0,0,5,0" />
-                <TextBox x:Name="AlphaTextBox" Width="50" Text="0.5" />
-            </StackPanel>
+                    <StackPanel x:Name="HurwiczPanel" Orientation="Horizontal" Margin="0,10" Visibility="Collapsed">
+                        <TextBlock Text="α (Коэффициент Гурвица):" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBox x:Name="AlphaTextBox" Width="50" Text="0.5" />
+                    </StackPanel>
 
-            <StackPanel x:Name="BayesLaplacePanel" Orientation="Horizontal" Margin="0,10" Visibility="Collapsed">
-                <TextBlock Text="Вероятности (через пробел):" VerticalAlignment="Center" Margin="0,0,5,0" />
-                <TextBox x:Name="ProbabilitiesTextBox" Width="150" Text="0.33 0.33 0.33" />
-            </StackPanel>
+                    <StackPanel x:Name="BayesLaplacePanel" Orientation="Horizontal" Margin="0,10" Visibility="Collapsed">
+                        <TextBlock Text="Вероятности (через пробел):" VerticalAlignment="Center" Margin="0,0,5,0" />
+                        <TextBox x:Name="ProbabilitiesTextBox" Width="150" Text="0.33 0.33 0.33" />
+                    </StackPanel>
 
-            <Button Height="30" Width="150" Content="Решить" Click="BtnSolve_Click" Margin="0 20 0 0" />
+                    <Button Height="30" Width="150" Content="Решить" Click="BtnSolve_Click" Margin="0 20 0 0" />
 
-            <TextBlock x:Name="TxtResult" FontWeight="Bold" Margin="10" TextWrapping="Wrap" />
+                    <TextBlock x:Name="TxtResult" FontWeight="Bold" Margin="10" TextWrapping="Wrap" />
 
-            <lvc:PieChart x:Name="OptimalStrategiesChart" Margin="10" Width="240" Height="200" />
-            <TextBlock x:Name="TxtOptimalStrategy" FontWeight="Bold" Margin="10" TextWrapping="Wrap" />
-        </StackPanel>
+                    <lvc:PieChart LegendLocation="Bottom" Series="{Binding pieChartData}" x:Name="OptimalStrategiesChart" Margin="10" Width="240" Height="200">
+                        <lvc:PieChart.ChartLegend>
+                            <lvc:DefaultLegend BulletSize="15" TextBlock.FontSize="8"/>
+                        </lvc:PieChart.ChartLegend>
+                    </lvc:PieChart>
+
+                    <TextBlock x:Name="TxtOptimalStrategy" FontWeight="Bold" Margin="10" TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+        </DockPanel>
     </Grid>
 
 </Page>

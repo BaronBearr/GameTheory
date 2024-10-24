@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GameTheory"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Теория игр" Height="750" Width="1200">
+        Title="Теория игр" Height="800" Width="1200">
     <Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

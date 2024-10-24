@@ -287,7 +287,7 @@ namespace GameTheory.AllPages
 
             if (criteriaResults == null || !criteriaResults.Any())
             {
-                Growl.Info("Нет данных о результатах критериев.");
+                 Growl.Info("Нет данных о результатах критериев.");
 
                 DispatcherTimer timer = new DispatcherTimer();
                 timer.Interval = TimeSpan.FromSeconds(5);
@@ -347,7 +347,7 @@ namespace GameTheory.AllPages
                     FontSize = 14 
                 });
             }
-
+           
             OptimalStrategiesChart.Series = pieChartData;
         }
         private void SolveWald()
@@ -400,7 +400,7 @@ namespace GameTheory.AllPages
                                           .ToArray();
             var optimalValue = hurwiczValues.Max();
 
-            int optimalStrategyIndex = Array.IndexOf(hurwiczValues, optimalValue) + 1;
+            int optimalStrategyIndex = Array.IndexOf(hurwiczValues, optimalValue);
             string optimalStrategyName = strategies[optimalStrategyIndex];
 
             TxtResult.Text = $"Оптимальная стратегия по критерию Гурвица: {optimalStrategyName}, значение: {optimalValue}";
@@ -438,7 +438,7 @@ namespace GameTheory.AllPages
             }
 
             double optimalRegret = maxRegretPerStrategy.Min(); 
-            int optimalStrategyIndex = Array.IndexOf(maxRegretPerStrategy, optimalRegret) + 1;
+            int optimalStrategyIndex = Array.IndexOf(maxRegretPerStrategy, optimalRegret);
             string optimalStrategyName = strategies[optimalStrategyIndex];
 
             if (!criteriaResults.Any(r => r.CriterionName == "Сэвиджа"))
@@ -460,7 +460,7 @@ namespace GameTheory.AllPages
             }
 
             double optimalLaplaceValue = laplaceValues.Max();
-            int optimalStrategyIndex = Array.IndexOf(laplaceValues, optimalLaplaceValue) + 1;
+            int optimalStrategyIndex = Array.IndexOf(laplaceValues, optimalLaplaceValue);
             string optimalStrategyName = strategies[optimalStrategyIndex];
 
 
@@ -519,7 +519,7 @@ namespace GameTheory.AllPages
             }
 
             double optimalValue = bayesLaplaceValues.Max();
-            int optimalStrategyIndex = Array.IndexOf(bayesLaplaceValues, optimalValue) + 1;
+            int optimalStrategyIndex = Array.IndexOf(bayesLaplaceValues, optimalValue);
             string optimalStrategyName = strategies[optimalStrategyIndex];
 
 
